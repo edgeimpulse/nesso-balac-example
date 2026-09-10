@@ -1,0 +1,8 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.BalaCControl" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="colorPrimary">#00979D</item>
+        <item name="colorPrimaryVariant">#007A80</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorSecondary">#00979D</item>
+    </style>
+</resources>

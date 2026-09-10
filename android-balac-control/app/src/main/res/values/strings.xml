@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">BalaC Control</string>
+    <string name="connect">Connect</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="disconnected">Disconnected</string>
+    <string name="no_telemetry">No telemetry</string>
+    <string name="forward">Forward</string>
+    <string name="back">Back</string>
+    <string name="left">Left</string>
+    <string name="right">Right</string>
+    <string name="stop">STOP</string>
+    <string name="toggle_mode">Toggle Stand / Demo</string>
+    <string name="telemetry_fmt">Battery %1$s%% · tilt %2$s° · standing: %3$s</string>
+</resources>
