@@ -1,9 +1,14 @@
 # Nesso N1 + BalaC — Balancing Robot Example
 
+
+
 A self-balancing robot built from the **Kiraku Labo BalaC** base and an **Arduino Nesso N1**
 (ESP32-C6) as the brain. This repo contains the robot firmware plus several ways to drive and
 extend it: a Bluetooth LE Android app, a micro-ROS bridge, a camera-based controller, and a
 Blockly teaching example.
+
+<img width="305" height="379" alt="image" src="https://github.com/user-attachments/assets/ead0e438-810c-4022-b7c0-374a05dc0382" />
+
 
 ```
 BalaCplus/               Balancing-robot firmware for the Nesso N1 (+ BLE remote control)
