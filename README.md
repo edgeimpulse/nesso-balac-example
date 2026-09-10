@@ -10,6 +10,22 @@ Blockly teaching example.
 <img width="305" height="379" alt="image" src="https://github.com/user-attachments/assets/ead0e438-810c-4022-b7c0-374a05dc0382" />
 
 
+## ⚡ Get started in 5 minutes
+
+Grab the prebuilt artifacts from the **[latest release](https://github.com/edgeimpulse/nesso-balac-example/releases/latest)** — no toolchain required.
+
+**A. Drive an assembled robot (~2 min)**
+
+1. Download **`balac-control-*.apk`** from the [latest release](https://github.com/edgeimpulse/nesso-balac-example/releases/latest) and install it on an Android phone (enable *Install unknown apps* if prompted).
+2. Power on the robot, open **BalaC Control**, tap **Connect**, then hold **Forward / Back / Left / Right**.
+
+**B. Flash the firmware (~5 min)**
+
+1. If the [latest release](https://github.com/edgeimpulse/nesso-balac-example/releases/latest) has a **`balac-firmware-*.bin`**, flash it straight from your browser with [esptool-js](https://espressif.github.io/esptool-js/): connect the Nesso N1 over USB-C, pick the port, select the `.bin`, and click **Program**.
+2. No binary attached yet? Open [BalaCplus/BalaCplus.ino](BalaCplus/BalaCplus.ino) in the Arduino IDE, install the **Arduino Nesso N1** core + [libraries](README-libs.md), and click **Upload** (details in [§ Flash the firmware](#1-flash-the-firmware)).
+
+> 📐 Reference: [architecture diagram](docs/architecture.md) · [bill of materials](docs/BOM.md)
+
 ```
 BalaCplus/               Balancing-robot firmware for the Nesso N1 (+ BLE remote control)
 android-balac-control/   Android app to drive the robot over Bluetooth LE
@@ -18,6 +34,8 @@ ros2_camera_control/     Raspberry Pi ROS 2 node that drives the robot from a ca
 blockly/                 Visual-programming teaching example (generates rclpy teleop)
 README-libs.md           Arduino libraries needed to build the firmware
 README-microros.md       micro-ROS setup notes
+docs/                    Architecture diagram + bill of materials
+.github/workflows/       CI: builds the APK and publishes release artifacts
 ```
 
 ## Hardware
@@ -25,6 +43,22 @@ README-microros.md       micro-ROS setup notes
 - **Nesso N1** (ESP32-C6) — MCU, display, buttons, BMI270 IMU, battery gauge.
 - **BalaC base** — two motors driven through an I²C motor driver at address `0x38`.
 - The two are connected over the shared I²C bus (motor driver `0x38`, IMU `0x68`).
+
+See the full **[bill of materials](docs/BOM.md)** for the parts list.
+
+## Architecture
+
+```mermaid
+flowchart LR
+    App["Android app<br/>(BLE client)"] -- "D,throttle,steer / S / M" --> FW["Nesso N1 · BalaCplus<br/>balance controller"]
+    FW -- "telemetry T,batt,tilt,standing" --> App
+    IMU["BMI270 IMU · I²C 0x68"] --> FW
+    FW -- "I²C 0x38" --> MD["BalaC motor driver"]
+    MD --> ML["Left motor"]
+    MD --> MR["Right motor"]
+```
+
+More detail (including the micro-ROS path) in [docs/architecture.md](docs/architecture.md).
 
 ## 1. Flash the firmware
 

@@ -1,0 +1,45 @@
+name: Android CI
+
+# Builds the debug APK on every push/PR that touches the app, so the build stays
+# green and each commit produces a downloadable APK artifact.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "android-balac-control/**"
+      - ".github/workflows/android.yml"
+  pull_request:
+    paths:
+      - "android-balac-control/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build debug APK
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Build
+        working-directory: android-balac-control
+        run: |
+          chmod +x ./gradlew
+          ./gradlew --no-daemon assembleDebug
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: balac-control-debug-apk
+          path: android-balac-control/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
