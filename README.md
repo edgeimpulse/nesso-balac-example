@@ -6,6 +6,8 @@ A self-balancing robot built from the **Kiraku Labo BalaC** base with an **Ardui
 (ESP32-C6) as the brain. This repo has the robot firmware plus a few ways to drive and extend
 it: a Bluetooth LE Android app, a micro-ROS bridge, a camera-based controller, and a Blockly
 teaching example.
+<img width="1812" height="1536" alt="image" src="https://github.com/user-attachments/assets/49e16712-4820-42b0-a8f3-5effe234cb5b" />
+
 
 <img width="305" height="379" alt="image" src="https://github.com/user-attachments/assets/ead0e438-810c-4022-b7c0-374a05dc0382" />
 
